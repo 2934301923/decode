@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta author="ForMat & RoBin Wang">
+<meta name="viewport"
+	content="width=device-width, minimum-scale=1, maximum-scale=1">
+<link rel="stylesheet" href="css/jquery.mobile.min.css" />
+<link rel="icon" href="images/icon.png" type="images/icon.png" />
+<script src="js/jquery-1.9.1.min.js">
+	
+</script>
+<script src="js/jquery.mobile.min.js">
+	
+</script>
+<script src="js/Base64.js"></script>
+<script src="js/UTF.js"></script>
+<script type="text/javascript" src="js/date.js"></script>
+<title>口袋妖怪解密工具</title>
+<style>
+html, body {
+	text-align: center;
+	padding: 0;
+	margin: 0;
+}
+
+html, .ui-mobile, .ui-mobile body {
+	height: 435px;
+}
+
+.ui-mobile, .ui-mobile .ui-page {
+	min-height: 435px;
+}
+
+.ui-content {
+	padding: 10px 15px 0px 15px;
+}
+
+.panel-content {
+	padding: 15px;
+}
+
+#txt {
+	/*设置文本框的宽和高*/
+	width: 100%;
+	height: 800px;
+}
+
+.date {
+	color: red;
+}
+</style>
+</head>
+<body>
+
+	<section id="page1" data-role="page">
+		<div data-role="content">
+			<img src="images/welcome.png"></img>
+			<h1 class="entry-title">ForMat团队出品 必属精品</h1>
+			<h4>适用于口袋妖怪单机版、斗罗大陆3龙王传说 ForMat团队二次优化</h4>
+			<h4 id="date" class="date"></h4>
+			<script type="text/javascript">
+				document.getElementById("date").innerHTML = "今天是："
+						+ getDatenow();
+			</script>
+			<div data-role="controlgroup" data-type="horizontal" data-mini="true">
+				<a href="#" data-role="button" id="btencode">加密</a> <a href="#"
+					data-role="button" id="btdecode">解密</a> <a href="#"
+					data-role="button" id="btcopy" onclick="copyUrl2();">复制</a> <a
+					href="#" data-role="button" id="btclear">清空</a>
+
+			</div>
+			<br>输入你要加密/解密的语句：<br>
+			<textarea id="txt"></textarea>
+			<div data-role="controlgroup" data-type="horizontal" data-mini="true">
+			</div>
+			<p style="color: grey; font-size: 90%">适用于《口袋妖怪单机版》、《斗罗大陆3龙王传说》等该游戏厂商的游戏存档解密加密
+				ForMat团队</p>
+		</div>
+	</section>
+	<script>
+		$('#btclear').bind('click', function() {
+			$('#txt').val("");
+		});
+
+		$('#btencode').bind('click', function() {
+			$('#txt').val(encode(utf16to8($('#txt').val())));
+		});
+
+		$('#btdecode').bind('click', function() {
+			$('#txt').val(utf8to16(decode($('#txt').val())));
+		});
+	</script>
+
+	<script type="text/javascript">
+		function copyUrl2() {
+			var Url2 = document.getElementById("txt");
+			Url2.select();
+			document.execCommand("Copy");
+		}
+	</script>
+
+
+</body>
+</html>
